@@ -1,0 +1,35 @@
+{
+  "name": "@bowwow/pornhub_api",
+  "version": "1.0.0",
+  "description": "pornhub api",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BowWowStudio/bowwow-pornhub-api.git"
+  },
+  "keywords": [
+    "pornhub"
+  ],
+  "author": "Bowwow",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BowWowStudio/bowwow-pornhub-api/issues"
+  },
+  "homepage": "https://github.com/BowWowStudio/bowwow-pornhub-api#readme",
+  "devDependencies": {
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "@types/cheerio": "^0.22.11",
+    "@types/request-promise": "^4.1.43",
+    "@types/selenium-webdriver": "^4.0.0",
+    "cheerio": "^1.0.0-rc.3",
+    "follow-redirects": "^1.7.0",
+    "request": "^2.88.0",
+    "request-promise": "^4.2.4",
+    "selenium-webdriver": "^4.0.0-alpha.1"
+  }
+}
