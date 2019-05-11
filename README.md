@@ -59,15 +59,6 @@ it filters out useless properties from the search result.
 | ------ | ------------------- | ------------ |
 | searchResult  | <code>object</code> | from the function search() |
 
-* ### filterJSON(searchResult) ⇒ <code>object</code>
-it filters out useless properties from the search result.
-
-**Kind**: instance method of <code>PornHub</code>
-
-| Param  | Type                | Description  |
-| ------ | ------------------- | ------------ |
-| searchResult  | <code>object</code> | from the function search() |
-
 * ### hasFLV(videoID) ⇒ <code>boolean</code>
 it returns true if the video with the id has a flv link, return false otherewise.
 
