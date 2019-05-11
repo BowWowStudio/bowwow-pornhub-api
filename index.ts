@@ -54,8 +54,8 @@ export class PornHub {
         })
         return returnPromise;
     }
-    filterJSON(infos: string): object {
-        let returnObject:object = JSON.parse(infos);
+    filterJSON(infos: object): object {
+        let returnObject:object = {...infos};
         let videos:Array<object> = returnObject['videos'];
         videos.forEach(video=>{
             delete video['thumbs'];
