@@ -46,32 +46,9 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 exports.__esModule = true;
-var https = require('follow-redirects').https;
 var rp = require("request-promise");
 var selenium_webdriver_1 = require("selenium-webdriver");
 var chrome = require("selenium-webdriver/chrome");
-var thumbSize;
-(function (thumbSize) {
-    thumbSize["small"] = "small";
-    thumbSize["medium"] = "medium";
-    thumbSize["large"] = "large";
-    thumbSize["small_hd"] = "small_hd";
-    thumbSize["medium_hd"] = "medium_hd";
-    thumbSize["large_hd"] = "large_hd";
-})(thumbSize = exports.thumbSize || (exports.thumbSize = {}));
-var period;
-(function (period) {
-    period["weekly"] = "weekly";
-    period["monthly"] = "monthly";
-    period["alltime"] = "alltime";
-})(period = exports.period || (exports.period = {}));
-var ordering;
-(function (ordering) {
-    ordering["featured"] = "featured";
-    ordering["newest"] = "newest";
-    ordering["mostviewed"] = "mostviewed";
-    ordering["rating"] = "rating";
-})(ordering = exports.ordering || (exports.ordering = {}));
 var PornHub = /** @class */ (function () {
     function PornHub() {
         this.videoURL = 'https://www.pornhub.com/view_video.php?viewkey=';
@@ -224,4 +201,5 @@ var PornHub = /** @class */ (function () {
     };
     return PornHub;
 }());
-exports.PornHub = PornHub;
+exports["default"] = PornHub;
+module.exports = PornHub;

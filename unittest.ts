@@ -1,4 +1,4 @@
-import {PornHub} from './index';
+import PornHub from './index';
 
 const ph = new PornHub();
 

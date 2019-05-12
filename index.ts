@@ -1,6 +1,3 @@
-import * as cheerio from 'cheerio';
-const https = require('follow-redirects').https;
-import * as url from 'url';
 import * as rp from 'request-promise';
 import {
     Builder,
@@ -9,9 +6,8 @@ import {
     WebDriver,
 } from "selenium-webdriver";
 import * as chrome from "selenium-webdriver/chrome";
-import { Driver } from 'selenium-webdriver/edge';
 
-export interface searchOption {
+declare interface searchOption {
     category ? : string,
         page ? : number,
         search ? : string,
@@ -21,7 +17,7 @@ export interface searchOption {
         period ? : period
     thumbsize ? : thumbSize
 }
-export enum thumbSize {
+declare enum thumbSize {
     small = 'small',
         medium = 'medium',
         large = 'large',
@@ -29,19 +25,19 @@ export enum thumbSize {
         medium_hd = 'medium_hd',
         large_hd = 'large_hd',
 }
-export enum period {
+declare enum period {
     weekly = 'weekly',
         monthly = 'monthly',
         alltime = 'alltime',
 }
-export enum ordering {
+declare enum ordering {
     featured = 'featured',
         newest = 'newest',
         mostviewed = 'mostviewed',
         rating = 'rating',
 }
 
-export class PornHub {
+export default class PornHub {
     private readonly videoURL = 'https://www.pornhub.com/view_video.php?viewkey='
     private readonly videoSearchBaseURL = 'http://www.pornhub.com/webmasters/search';
     private cacheVideo:Map<string,string> = new Map();
@@ -157,3 +153,5 @@ export class PornHub {
         return url
     }
 }
+
+module.exports = PornHub;

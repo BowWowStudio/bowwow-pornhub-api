@@ -12,20 +12,11 @@ $ npm i @bowwow/pornhub_api
 You can do it in two ways:
 
 ```js
-const PornHub = require('pornsearch');
+const PornHub = require('@bowwow/pornhub_api');
 const ph = new PornHub();
 
 ph.search({search:'porn'}).then(infos=>console.log(infos));
 ```
-
-```js
-// using import
-import PornHub from 'pornsearch';
-const ph = new PornHub();
-
-ph.search({search:'porn'}).then(infos=>console.log(infos));
-```
-
 
 ## Usage
 * ### search(options) ⇒ <code>object</code>

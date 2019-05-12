@@ -37,7 +37,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var _this = this;
 exports.__esModule = true;
 var index_1 = require("./index");
-var ph = new index_1.PornHub();
+var ph = new index_1["default"]();
 var test = function () { return __awaiter(_this, void 0, void 0, function () {
     var _a, _b, _c, _d, _e, _f, _g, _h;
     return __generator(this, function (_j) {
