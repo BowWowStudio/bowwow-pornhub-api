@@ -97,11 +97,9 @@ export default class PornHub {
             await driver.get(`${this.videoURL}${videoID}`);
             await driver.wait(until.elementLocated(By.css(videoCSS)), 10000);
             const downloadURL = await driver.findElement(By.css(videoCSS)).getAttribute("src");
-            console.log(downloadURL);
             driver.quit();
             return downloadURL;
         } catch (err) {
-            console.error(err);
             throw err;
         } finally{
             if(driver){

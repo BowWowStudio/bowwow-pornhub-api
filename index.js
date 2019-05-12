@@ -143,12 +143,10 @@ var PornHub = /** @class */ (function () {
                         return [4 /*yield*/, driver.findElement(selenium_webdriver_1.By.css(videoCSS)).getAttribute("src")];
                     case 4:
                         downloadURL = _a.sent();
-                        console.log(downloadURL);
                         driver.quit();
                         return [2 /*return*/, downloadURL];
                     case 5:
                         err_3 = _a.sent();
-                        console.error(err_3);
                         throw err_3;
                     case 6:
                         if (driver) {
