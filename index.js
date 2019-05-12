@@ -45,10 +45,17 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-exports.__esModule = true;
-var rp = require("request-promise");
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (Object.hasOwnProperty.call(mod, k)) result[k] = mod[k];
+    result["default"] = mod;
+    return result;
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+var rp = __importStar(require("request-promise"));
 var selenium_webdriver_1 = require("selenium-webdriver");
-var chrome = require("selenium-webdriver/chrome");
+var chrome = __importStar(require("selenium-webdriver/chrome"));
 var PornHub = /** @class */ (function () {
     function PornHub() {
         this.videoURL = 'https://www.pornhub.com/view_video.php?viewkey=';
@@ -66,12 +73,12 @@ var PornHub = /** @class */ (function () {
     };
     PornHub.prototype.filterJSON = function (infos) {
         var returnObject = __assign({}, infos);
-        var videos = returnObject['videos'];
+        var videos = returnObject.videos;
         videos.forEach(function (video) {
-            delete video['thumbs'];
-            delete video['tags'];
-            delete video['pornstars'];
-            delete video['categories'];
+            delete video.thumbs;
+            delete video.tags;
+            delete video.pornstars;
+            delete video.categories;
         });
         return returnObject;
     };
@@ -106,12 +113,12 @@ var PornHub = /** @class */ (function () {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         if (this.cacheVideo.has(videoID)) {
-                            return [2 /*return*/, this.cacheVideo.get(videoID)];
+                            return [2 /*return*/, String(this.cacheVideo.get(videoID))];
                         }
                         return [4 /*yield*/, this.getVideoSource(videoID)];
                     case 1:
                         videoSrc = _a.sent();
-                        this.cacheVideo.set(videoID, videoSrc);
+                        this.cacheVideo.set(videoID, String(videoSrc));
                         return [2 /*return*/, String(videoSrc)];
                     case 2:
                         err_2 = _a.sent();
@@ -127,32 +134,31 @@ var PornHub = /** @class */ (function () {
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 5, 6, 7]);
+                        driver = null;
+                        _a.label = 1;
+                    case 1:
+                        _a.trys.push([1, 6, , 7]);
                         return [4 /*yield*/, new selenium_webdriver_1.Builder().forBrowser("chrome")
                                 .setChromeOptions(new chrome.Options().headless()
                                 .addArguments("log-level=3")).build()];
-                    case 1:
+                    case 2:
                         driver = _a.sent();
                         videoCSS = 'div > video > source';
                         return [4 /*yield*/, driver.get("" + this.videoURL + videoID)];
-                    case 2:
-                        _a.sent();
-                        return [4 /*yield*/, driver.wait(selenium_webdriver_1.until.elementLocated(selenium_webdriver_1.By.css(videoCSS)), 10000)];
                     case 3:
                         _a.sent();
-                        return [4 /*yield*/, driver.findElement(selenium_webdriver_1.By.css(videoCSS)).getAttribute("src")];
+                        return [4 /*yield*/, driver.wait(selenium_webdriver_1.until.elementLocated(selenium_webdriver_1.By.css(videoCSS)), 10000)];
                     case 4:
+                        _a.sent();
+                        return [4 /*yield*/, driver.findElement(selenium_webdriver_1.By.css(videoCSS)).getAttribute("src")];
+                    case 5:
                         downloadURL = _a.sent();
                         driver.quit();
                         return [2 /*return*/, downloadURL];
-                    case 5:
-                        err_3 = _a.sent();
-                        throw err_3;
                     case 6:
-                        if (driver) {
-                            driver.quit();
-                        }
-                        return [7 /*endfinally*/];
+                        err_3 = _a.sent();
+                        driver.quit();
+                        throw err_3;
                     case 7: return [2 /*return*/];
                 }
             });
@@ -199,5 +205,5 @@ var PornHub = /** @class */ (function () {
     };
     return PornHub;
 }());
-exports["default"] = PornHub;
+exports.default = PornHub;
 module.exports = PornHub;
