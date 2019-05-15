@@ -27,7 +27,6 @@
     "@types/request-promise": "^4.1.43",
     "@types/selenium-webdriver": "^4.0.0",
     "cheerio": "^1.0.0-rc.3",
-    "follow-redirects": "^1.7.0",
     "request": "^2.88.0",
     "request-promise": "^4.2.4",
     "selenium-webdriver": "^4.0.0-alpha.1"

@@ -47,17 +47,17 @@ var test = function () { return __awaiter(_this, void 0, void 0, function () {
         switch (_j.label) {
             case 0:
                 _b = (_a = console).log;
-                return [4 /*yield*/, (ph.hasFLV('ph5c6be505d0c52'))];
+                return [4 /*yield*/, ph.hasFLV("ph5c6be505d0c52")];
             case 1:
                 _b.apply(_a, [_j.sent()]);
                 _d = (_c = console).log;
-                return [4 /*yield*/, (ph.getFLV('ph5c6be505d0c52'))];
+                return [4 /*yield*/, ph.getFLV("ph5c6be505d0c52")];
             case 2:
                 _d.apply(_c, [_j.sent()]);
                 _f = (_e = console).log;
                 _h = (_g = ph).filterJSON;
-                return [4 /*yield*/, ph.search({ search: 'hair brush' })];
-            case 3: return [4 /*yield*/, (_h.apply(_g, [_j.sent()]))];
+                return [4 /*yield*/, ph.search({ search: "hair brush" })];
+            case 3: return [4 /*yield*/, _h.apply(_g, [_j.sent()])];
             case 4:
                 _f.apply(_e, [_j.sent()]);
                 return [2 /*return*/];

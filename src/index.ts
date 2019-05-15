@@ -1,6 +1,7 @@
 import * as rp from "request-promise";
 import { Builder, By, until, WebDriver } from "selenium-webdriver";
 import * as chrome from "selenium-webdriver/chrome";
+import { constants } from "http2";
 
 declare interface searchOption {
   category?: string;
@@ -95,9 +96,10 @@ export default class PornHub {
     return returnObject;
   }
   async hasFLV(videoID: string): Promise<boolean> {
+    const flvStartURL = "phncdn.com";
     try {
       const videoSrc = await this.getVideoSource(videoID);
-      if (typeof videoSrc !== "undefined") {
+      if (typeof videoSrc !== "undefined" && videoSrc.includes(flvStartURL)) {
         this.cacheVideo.set(videoID, videoSrc);
         return true;
       }
@@ -136,7 +138,9 @@ export default class PornHub {
       driver.quit();
       return downloadURL;
     } catch (err) {
-      driver!.quit();
+      if (driver) {
+        driver.quit();
+      }
       throw err;
     }
   }

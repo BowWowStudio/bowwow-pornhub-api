@@ -6,6 +6,7 @@ Via NPM:
 ```bash
 $ npm i @bowwow/pornhub_api
 ```
+Visit http://chromedriver.storage.googleapis.com/index.html and download the chrome driver. Place it on your system PATH
 
 ## Import
 

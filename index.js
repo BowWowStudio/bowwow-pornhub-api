@@ -58,8 +58,8 @@ var selenium_webdriver_1 = require("selenium-webdriver");
 var chrome = __importStar(require("selenium-webdriver/chrome"));
 var PornHub = /** @class */ (function () {
     function PornHub() {
-        this.videoURL = 'https://www.pornhub.com/view_video.php?viewkey=';
-        this.videoSearchBaseURL = 'http://www.pornhub.com/webmasters/search';
+        this.videoURL = "https://www.pornhub.com/view_video.php?viewkey=";
+        this.videoSearchBaseURL = "http://www.pornhub.com/webmasters/search";
         this.cacheVideo = new Map();
     }
     PornHub.prototype.search = function (option) {
@@ -84,23 +84,26 @@ var PornHub = /** @class */ (function () {
     };
     PornHub.prototype.hasFLV = function (videoID) {
         return __awaiter(this, void 0, void 0, function () {
-            var videoSrc, err_1;
+            var flvStartURL, videoSrc, err_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, this.getVideoSource(videoID)];
+                        flvStartURL = "phncdn.com";
+                        _a.label = 1;
                     case 1:
+                        _a.trys.push([1, 3, , 4]);
+                        return [4 /*yield*/, this.getVideoSource(videoID)];
+                    case 2:
                         videoSrc = _a.sent();
-                        if (typeof videoSrc !== 'undefined') {
+                        if (typeof videoSrc !== "undefined" && videoSrc.includes(flvStartURL)) {
                             this.cacheVideo.set(videoID, videoSrc);
                             return [2 /*return*/, true];
                         }
                         return [2 /*return*/, false];
-                    case 2:
+                    case 3:
                         err_1 = _a.sent();
                         throw err_1;
-                    case 3: return [2 /*return*/];
+                    case 4: return [2 /*return*/];
                 }
             });
         });
@@ -138,26 +141,31 @@ var PornHub = /** @class */ (function () {
                         _a.label = 1;
                     case 1:
                         _a.trys.push([1, 6, , 7]);
-                        return [4 /*yield*/, new selenium_webdriver_1.Builder().forBrowser("chrome")
-                                .setChromeOptions(new chrome.Options().headless()
-                                .addArguments("log-level=3")).build()];
+                        return [4 /*yield*/, new selenium_webdriver_1.Builder()
+                                .forBrowser("chrome")
+                                .setChromeOptions(new chrome.Options().headless().addArguments("log-level=3"))
+                                .build()];
                     case 2:
                         driver = _a.sent();
-                        videoCSS = 'div > video > source';
+                        videoCSS = "div > video > source";
                         return [4 /*yield*/, driver.get("" + this.videoURL + videoID)];
                     case 3:
                         _a.sent();
                         return [4 /*yield*/, driver.wait(selenium_webdriver_1.until.elementLocated(selenium_webdriver_1.By.css(videoCSS)), 10000)];
                     case 4:
                         _a.sent();
-                        return [4 /*yield*/, driver.findElement(selenium_webdriver_1.By.css(videoCSS)).getAttribute("src")];
+                        return [4 /*yield*/, driver
+                                .findElement(selenium_webdriver_1.By.css(videoCSS))
+                                .getAttribute("src")];
                     case 5:
                         downloadURL = _a.sent();
                         driver.quit();
                         return [2 /*return*/, downloadURL];
                     case 6:
                         err_3 = _a.sent();
-                        driver.quit();
+                        if (driver) {
+                            driver.quit();
+                        }
                         throw err_3;
                     case 7: return [2 /*return*/];
                 }
@@ -166,24 +174,24 @@ var PornHub = /** @class */ (function () {
     };
     PornHub.prototype.buildSearchUrl = function (option) {
         var url = this.videoSearchBaseURL + "?";
-        if (typeof option.category === 'string') {
+        if (typeof option.category === "string") {
             url += "&category=" + option.category;
         }
-        if (typeof option.page === 'number') {
+        if (typeof option.page === "number") {
             if (option.page >= 0) {
                 url += "&page=" + option.page;
             }
         }
-        if (typeof option.search === 'string') {
+        if (typeof option.search === "string") {
             url += "&search=" + option.search;
         }
-        if (typeof option.phrase === 'string') {
+        if (typeof option.phrase === "string") {
             url += "&phrase[]=" + option.phrase;
         }
         else if (option.phrase instanceof Array) {
             url += "&phrase[]=" + option.phrase.join(",");
         }
-        if (typeof option.tags === 'string') {
+        if (typeof option.tags === "string") {
             url += "&tags[]=" + option.tags;
         }
         else if (option.tags instanceof Array) {
