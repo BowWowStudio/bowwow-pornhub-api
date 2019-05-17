@@ -122,6 +122,7 @@ export default class PornHub {
   }
   private async getVideoSource(videoID: string): Promise<string | undefined> {
     let driver: WebDriver | null = null;
+    const flvStartURL = "phncdn.com";
     try {
       driver = await new Builder()
         .forBrowser("chrome")
@@ -130,11 +131,18 @@ export default class PornHub {
         )
         .build();
       const videoCSS = "div > video > source";
+      const downloadTabCSS = '.video-actions-container >.video-actions-tabs >.download-tab >div.contentWrapper > a:nth-child(1)';
       await driver.get(`${this.videoURL}${videoID}`);
       await driver.wait(until.elementLocated(By.css(videoCSS)), 10000);
-      const downloadURL = await driver
+      let downloadURL = await driver
         .findElement(By.css(videoCSS))
         .getAttribute("src");
+      if(!downloadURL.includes(flvStartURL)){
+        await driver.wait(until.elementLocated(By.css(downloadTabCSS)), 10000);
+        downloadURL = await driver
+        .findElement(By.css(downloadTabCSS))
+        .getAttribute('href');
+      }
       driver.quit();
       return downloadURL;
     } catch (err) {

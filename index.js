@@ -133,14 +133,15 @@ var PornHub = /** @class */ (function () {
     };
     PornHub.prototype.getVideoSource = function (videoID) {
         return __awaiter(this, void 0, void 0, function () {
-            var driver, videoCSS, downloadURL, err_3;
+            var driver, flvStartURL, videoCSS, downloadTabCSS, downloadURL, err_3;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         driver = null;
+                        flvStartURL = "phncdn.com";
                         _a.label = 1;
                     case 1:
-                        _a.trys.push([1, 6, , 7]);
+                        _a.trys.push([1, 9, , 10]);
                         return [4 /*yield*/, new selenium_webdriver_1.Builder()
                                 .forBrowser("chrome")
                                 .setChromeOptions(new chrome.Options().headless().addArguments("log-level=3"))
@@ -148,6 +149,7 @@ var PornHub = /** @class */ (function () {
                     case 2:
                         driver = _a.sent();
                         videoCSS = "div > video > source";
+                        downloadTabCSS = '.video-actions-container >.video-actions-tabs >.download-tab >div.contentWrapper > a:nth-child(1)';
                         return [4 /*yield*/, driver.get("" + this.videoURL + videoID)];
                     case 3:
                         _a.sent();
@@ -159,15 +161,26 @@ var PornHub = /** @class */ (function () {
                                 .getAttribute("src")];
                     case 5:
                         downloadURL = _a.sent();
+                        if (!!downloadURL.includes(flvStartURL)) return [3 /*break*/, 8];
+                        return [4 /*yield*/, driver.wait(selenium_webdriver_1.until.elementLocated(selenium_webdriver_1.By.css(downloadTabCSS)), 10000)];
+                    case 6:
+                        _a.sent();
+                        return [4 /*yield*/, driver
+                                .findElement(selenium_webdriver_1.By.css(downloadTabCSS))
+                                .getAttribute('href')];
+                    case 7:
+                        downloadURL = _a.sent();
+                        _a.label = 8;
+                    case 8:
                         driver.quit();
                         return [2 /*return*/, downloadURL];
-                    case 6:
+                    case 9:
                         err_3 = _a.sent();
                         if (driver) {
                             driver.quit();
                         }
                         throw err_3;
-                    case 7: return [2 /*return*/];
+                    case 10: return [2 /*return*/];
                 }
             });
         });
