@@ -99,7 +99,7 @@ export default class PornHub {
     const flvStartURL = "phncdn.com";
     try {
       const videoSrc = await this.getVideoSource(videoID);
-      if (typeof videoSrc !== "undefined" && videoSrc.includes(flvStartURL)) {
+      if (typeof videoSrc !== 'undefined' && videoSrc.includes(flvStartURL)) {
         this.cacheVideo.set(videoID, videoSrc);
         return true;
       }
@@ -131,17 +131,23 @@ export default class PornHub {
         )
         .build();
       const videoCSS = "div > video > source";
-      const downloadTabCSS = '.video-actions-container >.video-actions-tabs >.download-tab >div.contentWrapper > a:nth-child(1)';
+      const pay2download = 'div > div > div > span.pay2Download';
+      const downloadTabCSS = '.video-actions-container >.video-actions-tabs >.download-tab >div.contentWrapper > a[target=_blank]';
       await driver.get(`${this.videoURL}${videoID}`);
       await driver.wait(until.elementLocated(By.css(videoCSS)), 10000);
       let downloadURL = await driver
         .findElement(By.css(videoCSS))
         .getAttribute("src");
       if(!downloadURL.includes(flvStartURL)){
-        await driver.wait(until.elementLocated(By.css(downloadTabCSS)), 10000);
-        downloadURL = await driver
-        .findElement(By.css(downloadTabCSS))
-        .getAttribute('href');
+        await driver.wait(until.elementLocated(By.css(pay2download)), 5000);
+        const pay2downloadButton = await driver
+        .findElement(By.css(pay2download));
+        if(pay2downloadButton === null){
+          await driver.wait(until.elementLocated(By.css(downloadTabCSS)), 5000);
+          downloadURL = await driver
+          .findElement(By.css(downloadTabCSS))
+          .getAttribute('href');
+        }
       }
       driver.quit();
       return downloadURL;
@@ -149,7 +155,7 @@ export default class PornHub {
       if (driver) {
         driver.quit();
       }
-      throw err;
+      return undefined;
     }
   }
   private buildSearchUrl(option: searchOption): string {
